@@ -1,5 +1,5 @@
 # Flosight Docker files
-[![Docker Image CI](https://github.com/ranchimall/flosight-docker-files/actions/workflows/build-publish-main.yml/badge.svg)](https://github.com/ranchimall/flosight-docker-files/actions/workflows/build-publish-main.yml)
+[![Docker Build main](https://github.com/ranchimall/flosight-docker-files/actions/workflows/build-publish-main.yml/badge.svg)](https://github.com/ranchimall/flosight-docker-files/actions/workflows/build-publish-main.yml)   [![Docker Build dev](https://github.com/ranchimall/flosight-docker-files/actions/workflows/build-publish-dev.yml/badge.svg)](https://github.com/ranchimall/flosight-docker-files/actions/workflows/build-publish-dev.yml)
 
 ## Command to run the docker
 
