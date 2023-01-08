@@ -6,13 +6,9 @@
 ```
 docker volume create flosight
 
-docker run -d --name=flosight \
-    -p 8080:80 \
-    --mount source=flosight,target=/data \
-    --env NETWORK=mainnet --env ADDNODE=ranchimall1.duckdns.org \ --env BLOCKCHAIN_BOOTSTRAP=http://servername:port/data.tar.gz
-    ranchimallfze/flosight
+docker run -d --name=flosight -p 9200:80  --mount source=flosight,target=/data --env NETWORK=mainnet --env ADDNODE=ramanujam.ranchimall.net  --env BLOCKCHAIN_BOOTSTRAP=https://bootstrap.ranchimall.net/data.tar.gz ranchimallfze/flosight:github
 
-docker logs -f flosight
+docker logs --follow --tail 500 flosight
 ```    
 
 Open the page http://localhost:8080/api/sync to view the sync status (available API endpoints). After sync is at 100%, you can open the page http://localhost:8080. If you open the homepage while it is still syncing, you will quickly get rate limited, as the UI makes a request for every block update that comes in (this is a bug that may be fixed at some point in the future).
@@ -26,6 +22,7 @@ CUSTOM_FCOIN_CONFIG: [String] A string (seperated with \n to split lines lines) 
 
 ## Instructions to build the image
 
+### Manually
 ```
 git clone https://github.com/ranchimall/flosight-docker-files/
 
@@ -34,7 +31,18 @@ cd flosight-docker-files
 sudo docker build -t ranchimallfze/flosight:1.0.0 .
 ```
 
-## CI 
+### CI 
 
-This repo has a continuos integration with DockerHub
+This repo has continuos integration workflows setup with Github Actions. On every commit or pull request to ranchimall/flosight-docker-files, 2 workflows will be triggered to build Docker images: 
+1. For main branch of flocore-node JS
+2. For dev branch of flocore-node JS 
+
+After building the images they are pushed to DockerHub under the following tags:
+* flocore-node main branch - ranchimallfze/flosight:github
+* flocore-node dev branch  - ranchimallfze/flosight:dev
+
+Note - If there have been changes in the dependent repositories mentioned inside the Docker file, then you'll want trigger the workflows again since Github Actions cannot detect changes in them. Steps to trigger workflows again:
+1. Go to **Actions** tab of the repository
+2. Click the latest Workflow run mentioned in the list, under the column "x workflow runs"
+3. On the left side under **Jobs**, click rebuild icon
 
