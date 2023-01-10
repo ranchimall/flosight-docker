@@ -6,7 +6,7 @@
 ```
 docker volume create flosight
 
-docker run -d --name=flosight -p 9200:80  --mount source=flosight,target=/data --env NETWORK=mainnet --env ADDNODE=ramanujam.ranchimall.net  --env BLOCKCHAIN_BOOTSTRAP=https://bootstrap.ranchimall.net/data.tar.gz ranchimallfze/flosight:github
+docker run -d --name=flosight -p 9200:80  --mount source=flosight,target=/data --env NETWORK=mainnet --env ADDNODE=ramanujam.ranchimall.net  --env BLOCKCHAIN_BOOTSTRAP=https://bootstrap.ranchimall.net/flosight1.tar.gz ranchimallfze/flosight:github
 
 docker logs --follow --tail 500 flosight
 ```    
