@@ -1,6 +1,11 @@
+const fs = require('fs');
 const fetch = require('node-fetch');
 
 const URL = 'http://localhost:3001';
+
+const STATUS_FILE = 'healthcheck.status',
+    READY_FILE = 'healthcheck.ready',
+    LOG_FILE = 'healthcheck.log';
 
 const checks = [];
 
@@ -72,15 +77,18 @@ checks.push(function check_lastBlock() {
 Promise.all(checks.map(c => c())).then(results => {
     let reasons = results.filter(r => r !== true);
     if (!reasons.length) {
-        console.debug("HEALTHY");
+        fs.writeFileSync(STATUS_FILE, "HEALTHY");
+        fs.writeFileSync(READY_FILE, "1");  //Indicate the node has reached healthy status atleast once
         process.exit(0);
     } else {
-        console.debug("UNHEALTHY");
-        console.debug(reasons);
+        fs.writeFileSync(STATUS_FILE, "UNHEALTHY");
+        let reason_log = `${new Date().toJSON()}:FAIL: ${JSON.stringify(reasons)}\n`;
+        fs.writeFileSync(LOG_FILE, reason_log, { flag: 'a' });
         process.exit(1);
     }
 }).catch(err => {
-    console.debug("ERROR");
-    console.error(err);
+    fs.writeFileSync(STATUS_FILE, "ERROR");
+    let err_log = `${new Date().toJSON()}:ERROR: ${err}\n`;
+    fs.writeFileSync(LOG_FILE, err_log, { flag: 'a' });
     process.exit(1);
 })
