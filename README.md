@@ -9,16 +9,18 @@ docker volume create flosight
 docker run -d --name=flosight -p 9200:80  --mount source=flosight,target=/data --env NETWORK=mainnet --env ADDNODE=ramanujam.ranchimall.net  --env BLOCKCHAIN_BOOTSTRAP=https://bootstrap.ranchimall.net/flosight1.tar.gz ranchimallfze/flosight:github
 
 docker logs --follow --tail 500 flosight
+```
 
-# If you want flosight to automatically start after your server/computer restarts, then add restart policy 
-# --restart=always
+If you want flosight to automatically start after your server/computer restarts, then add restart policy **--restart=always**
 
+```
 docker run -d --restart=always --name=flosight -p 9200:80  --mount source=flosight,target=/data --env NETWORK=mainnet --env ADDNODE=ramanujam.ranchimall.net  --env BLOCKCHAIN_BOOTSTRAP=https://bootstrap.ranchimall.net/flosight1.tar.gz ranchimallfze/flosight:github
+```
 
-# If you want to change the restart policy of an existing container
+If you want to change the restart policy of an existing container
 
+```
 docker update --restart=always <container>
-
 ```    
 
 Open the page http://localhost:8080/api/sync to view the sync status (available API endpoints). After sync is at 100%, you can open the page http://localhost:8080. If you open the homepage while it is still syncing, you will quickly get rate limited, as the UI makes a request for every block update that comes in (this is a bug that may be fixed at some point in the future).
