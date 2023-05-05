@@ -10,6 +10,7 @@ RUN update-ca-certificates
 
 # Install flosight
 WORKDIR /flosight
+RUN echo "flosight"
 RUN git clone https://github.com/ranchimall/flocore-node
 RUN npm install ./flocore-node/
 RUN npm install node-fetch@2
