@@ -6,7 +6,7 @@
 ```
 docker volume create flosight
 
-docker run -d --name=flosight -p 9200:80  --mount source=flosight,target=/data --env NETWORK=mainnet --env ADDNODE=ramanujam.ranchimall.net  --env BLOCKCHAIN_BOOTSTRAP=https://bootstrap.ranchimall.net/flosight1.tar.gz ranchimallfze/flosight:github
+docker run -d --name=flosight -p 9200:80  --mount source=flosight,target=/data --env NETWORK=mainnet --env ADDNODE=ramanujam.ranchimall.net  --env BLOCKCHAIN_BOOTSTRAP=https://bootstrap.ranchimall.net/flosight-bootstrap.tar.gz ranchimallfze/flosight:github
 
 docker logs --follow --tail 500 flosight
 ```
@@ -14,7 +14,7 @@ docker logs --follow --tail 500 flosight
 If you want flosight to automatically start after your server/computer restarts, then add restart policy **--restart=always**
 
 ```
-docker run -d --restart=always --name=flosight -p 9200:80  --mount source=flosight,target=/data --env NETWORK=mainnet --env ADDNODE=ramanujam.ranchimall.net  --env BLOCKCHAIN_BOOTSTRAP=https://bootstrap.ranchimall.net/flosight1.tar.gz ranchimallfze/flosight:github
+docker run -d --restart=always --name=flosight -p 9200:80  --mount source=flosight,target=/data --env NETWORK=mainnet --env ADDNODE=ramanujam.ranchimall.net  --env BLOCKCHAIN_BOOTSTRAP=https://bootstrap.ranchimall.net/flosight-bootstrap.tar.gz ranchimallfze/flosight:github
 ```
 
 If you want to change the restart policy of an existing container
