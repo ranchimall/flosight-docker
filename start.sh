@@ -29,15 +29,15 @@ then
   # download and extract a Blockchain boostrap
   echo 'Downloading Blockchain Bootstrap...'
   RUNTIME="$(date +%s)"
-  curl -L $BLOCKCHAIN_BOOTSTRAP -o /data/bootstrap.tar.gz --progress-bar | tee /dev/null
+  curl -L $BLOCKCHAIN_BOOTSTRAP -o /data/flosight-bootstrap.tar.gz --progress-bar | tee /dev/null
   RUNTIME="$(($(date +%s)-RUNTIME))"
   echo "Blockchain Bootstrap Download Complete (took ${RUNTIME} seconds)"
   echo 'Extracting Bootstrap...'
   RUNTIME="$(date +%s)"
-  tar -xzf /data/bootstrap.tar.gz -C /data
+  tar -xzf /data/flosight-bootstrap.tar.gz -C /data
   RUNTIME="$(($(date +%s)-RUNTIME))"
   echo "Blockchain Bootstrap Extraction Complete! (took ${RUNTIME} seconds)"
-  rm -f /data/bootstrap.tar.gz
+  rm -f /data/flosight-bootstrap.tar.gz
   echo 'Erased Blockchain Bootstrap `.tar.gz` file'
   echo "$BLOCKCHAIN_BOOTSTRAP" > /data/bootstrap-url.txt
   ls /data
